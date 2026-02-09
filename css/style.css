@@ -19,6 +19,8 @@ a {
 
 .header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem;
@@ -30,12 +32,61 @@ a {
 
 .header-menu {
   display: flex;
+  flex-wrap: wrap;
   gap: 2.5rem;
 }
 
 .header-menu a {
+  position: relative;
   display: inline-block;
   color: #fff;
   padding: 1rem 0rem;
   font-size: 1.2rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header-menu a:after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 0px;
+  background: #fff;
+  margin-top: 4px;
+  transition: 0.3s;
+  position: absolute;
+}
+
+.header-menu a:hover:after{
+  width: 100%;
+}
+
+@media (max-width: 800px) {
+  .header-menu {
+    gap: 1.25rem;
+  }
+
+  .header-menu a {
+    background: #111;
+    border-radius: 4px;
+    padding: 0.75rem 1rem;
+  }
+
+  .header-menu a:after {
+    content: none;
+  }
+
+  .header-menu a:hover {
+    background-color: #2e2e2e;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-menu {
+    gap: 0.75rem;
+  }
+
+  .header-menu a {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
 }
