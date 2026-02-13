@@ -1,3 +1,12 @@
+.container {
+  box-sizing: border-box;
+  max-width: 75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .botao {
   padding: 1rem 2rem;
   background: linear-gradient(#ffbb00, #f2a50c);
