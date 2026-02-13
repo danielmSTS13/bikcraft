@@ -1,6 +1,16 @@
+/* Componentes globais */
 @import "./global/global.css";
 @import "./global/header.css";
 @import "./home/introducao.css";
+
+
+
+/* Estilos gerais */
 @import "./utilidades/componentes.css";
 @import "./utilidades/tipografia.css";
 @import "./utilidades/cores.css";
+
+
+/* Bicicletas */
+@import "./bicicletas/bicicletas-lista.css";
+
