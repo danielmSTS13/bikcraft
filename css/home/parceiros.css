@@ -39,6 +39,11 @@
     padding-bottom: 3.75rem;
   }
 
+  .parceiros li {
+    display: flex;
+    padding: 20px;
+  }
+
   .parceiros h2 {
     margin-bottom: 1.25rem;
   }

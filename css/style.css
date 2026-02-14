@@ -19,6 +19,9 @@
 
 /* Parceiros */
 
-@import "./home/parceiros.css"
+@import "./home/parceiros.css";
+
+/* Depoimento */
+@import "./home/depoimento.css";
 
 
