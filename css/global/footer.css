@@ -14,54 +14,58 @@
   margin-bottom: 2rem;
 }
 
-.footer li + li {
+.footer li {
   margin-top: 1rem;
 }
 
 .footer-informacoes {
-  grid-column: 3;
-  grid-row: 1;
   display: flex;
   flex-direction: column;
 }
 
-.footer-redes,
-.footer-contato {
-  grid-column: 2;
-}
-
 .footer-redes {
+  margin-top: 2rem;
   display: flex;
-  justify-content: space-around;
-  grid-row: 2;
+  gap: 2.5rem;
 }
 
 .footer-copy {
   grid-column: 1 / -1;
-  text-align: center;
 }
 
+.footer-contato li:nth-child(even)::after {
+  content: "";
+  display: block;
+  height: 2px;
+  max-width: 320px;
+  margin-top: 10px;
+  background: var(--cor-10);
+}
+
+.footer a{
+  transition: 0.3s ease;
+}
+
+.footer a:hover {
+  color: var(--cor-9);
+}
+
+
 @media (max-width: 800px) {
+  .footer > img {
+    display: none;
+  }
 
   .footer {
-    display: flex;
-    flex-direction: column;
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .footer {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
-    padding-top: 3.75rem;
-    padding-bottom: 3.75rem;
-    text-align: center;
   }
 
-  #footer-logo {
-    max-width: 50%;
-    align-self: center;
-  }
-
-  .footer-redes {
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-    justify-content: center;
-    gap: 4rem;
-  }
 }
