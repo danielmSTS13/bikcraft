@@ -42,12 +42,17 @@
   background: var(--cor-10);
 }
 
+.footer-copy{
+  grid-column: 1/-1;
+  margin-top: 40px;
+}
+
 .footer a{
   transition: 0.3s ease;
 }
 
 .footer a:hover {
-  color: var(--cor-9);
+  color: var(--cor-0);
 }
 
 
@@ -66,6 +71,10 @@
 
   .footer {
     grid-template-columns: 1fr;
+    gap: 60px;
   }
 
+    .footer-copy{
+      margin-top: 0px;
+    }
 }
