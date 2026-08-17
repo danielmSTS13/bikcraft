@@ -68,6 +68,11 @@
     padding-bottom: 3.75rem;
   }
 
+  .bicicletas-lista container {
+    padding-top: 3.75rem;
+    padding-bottom: 0;
+  }
+
   .bicicletas-lista ul {
     gap: 1.25rem;
   }
