@@ -12,6 +12,9 @@
 @import "./utilidades/cores.css";
 
 
+/* Bicicleta */
+@import "./bicicleta/bicicleta.css";
+
 /* Bicicletas */
 @import "./bicicletas/bicicletas.css";
 @import "./bicicletas/bicicletas-lista.css";
