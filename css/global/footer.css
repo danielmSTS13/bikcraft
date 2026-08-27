@@ -30,6 +30,7 @@
 }
 
 .footer-copy {
+  text-align: center;
   grid-column: 1 / -1;
 }
 
