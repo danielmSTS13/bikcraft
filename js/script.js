@@ -71,3 +71,59 @@ galeria.forEach(eventosGaleria);
 if (window.SimpleAnime) {
   new SimpleAnime(); 
 };
+
+//  ENVIO DO FORMULÁRIO (WEB3FORMS) 
+
+const formContato = document.getElementById('contato-form');
+const botaoEnviar = document.getElementById('botao-enviar');
+const feedback = document.getElementById('form-feedback');
+
+if (formContato && botaoEnviar && feedback) {
+  formContato.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Impede o redirecionamento padrão do navegador
+
+    // 1. Estado de envio
+    botaoEnviar.disabled = true;
+    botaoEnviar.innerText = 'Enviando...';
+    feedback.style.display = 'none';
+    feedback.innerText = '';
+
+    // 2. Extração dos dados do formulário
+    const formData = new FormData(formContato);
+    const json = JSON.stringify(Object.fromEntries(formData));
+
+    try {
+      // 3. Disparo assíncrono para a Web3Forms
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: json
+      });
+
+      const data = await response.json();
+
+      // Tratando a resposta
+      if (response.status === 200 && data.success) {
+        feedback.innerText = 'Mensagem enviada com sucesso! Responderemos em até 24h.';
+        feedback.style.color = '#38b000';
+        feedback.style.display = 'block';
+        
+        formContato.reset(); 
+      } else {
+          feedback.innerText = data.message || 'Ocorreu um erro no envio. Tente novamente.';
+          feedback.style.color = '#e63946';
+          feedback.style.display = 'block';
+      }
+    } catch (error) {
+        feedback.innerText = 'Não foi possível conectar ao servidor. Verifique sua conexão.';
+        feedback.style.color = '#e63946';
+        feedback.style.display = 'block';
+    } finally {
+        botaoEnviar.disabled = false;
+        botaoEnviar.innerText = 'Enviar Mensagem';
+    }
+  });
+}

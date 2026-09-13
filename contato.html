@@ -69,10 +69,12 @@
         </div>
       </section>
       <section class="contato-formulario" aria-label="Formulário">
-        <form class="form" action="./contato.html">
+        <form class="form" id="contato-form" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="fac20134-6bc7-4ede-a74c-bef760460408">
+          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
           <div>
             <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" placeholder="Seu nome">
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
           </div>
           <div>
             <label for="telefone">Telefone</label>
@@ -80,13 +82,15 @@
           </div>
           <div>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="contato@email.com">
+            <input type="email" id="email" name="email" placeholder="contato@email.com" required>
           </div>
           <div>
             <label for="mensagem">Mensagem</label>
-            <textarea rows="5" id="mensagem" name="mensagem" placeholder="O que você precisa?"></textarea>
+            <textarea rows="5" id="mensagem" name="mensagem" placeholder="O que você precisa?" required></textarea>
           </div>
-          <button class="botao">Enviar Mensagem</button>
+          <button class="botao" id="botao-enviar">Enviar Mensagem</button>
+
+          <div id="form-feedback" class="confirmacao font-1-m" style="grid-column: 1 / -1; margin-top: 12px; display: none;"></div>
         </form>
       </section>
     </div>
