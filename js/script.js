@@ -72,28 +72,32 @@ if (window.SimpleAnime) {
   new SimpleAnime(); 
 };
 
-//  ENVIO DO FORMULÁRIO (WEB3FORMS) 
+//  ENVIO DO FORMULÁRIO DE CONTATO (WEB3FORMS) 
 
-const formContato = document.getElementById('contato-form');
-const botaoEnviar = document.getElementById('botao-enviar');
-const feedback = document.getElementById('form-feedback');
+function configurarFormulario(formId, botaoId, feedbackId, msgSucesso) {
+  const form = document.getElementById(formId);
+  const botao = document.getElementById(botaoId);
+  const feedback = document.getElementById(feedbackId);
 
-if (formContato && botaoEnviar && feedback) {
-  formContato.addEventListener('submit', async (e) => {
-    e.preventDefault(); // Impede o redirecionamento padrão do navegador
+  // Se os elementos não existirem na página atual, encerra a execução
+  if (!form || !botao || !feedback) return;
 
-    // 1. Estado de envio
-    botaoEnviar.disabled = true;
-    botaoEnviar.innerText = 'Enviando...';
+  const textoOriginal = botao.innerText;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // 1. Estado de carregamento
+    botao.disabled = true;
+    botao.innerText = 'Enviando...';
     feedback.style.display = 'none';
     feedback.innerText = '';
 
-    // 2. Extração dos dados do formulário
-    const formData = new FormData(formContato);
+    // 2. Extrai todos os campos que possuem o atributo "name"
+    const formData = new FormData(form);
     const json = JSON.stringify(Object.fromEntries(formData));
 
     try {
-      // 3. Disparo assíncrono para a Web3Forms
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
@@ -105,25 +109,44 @@ if (formContato && botaoEnviar && feedback) {
 
       const data = await response.json();
 
-      // Tratando a resposta
       if (response.status === 200 && data.success) {
-        feedback.innerText = 'Mensagem enviada com sucesso! Responderemos em até 24h.';
+        // Sucesso
+        feedback.innerText = msgSucesso;
         feedback.style.color = '#38b000';
         feedback.style.display = 'block';
-        
-        formContato.reset(); 
+        form.reset();
       } else {
-          feedback.innerText = data.message || 'Ocorreu um erro no envio. Tente novamente.';
-          feedback.style.color = '#e63946';
-          feedback.style.display = 'block';
-      }
-    } catch (error) {
-        feedback.innerText = 'Não foi possível conectar ao servidor. Verifique sua conexão.';
+        // Erro retornado pela API
+        feedback.innerText = data.message || 'Ocorreu um erro no envio. Tente novamente.';
         feedback.style.color = '#e63946';
         feedback.style.display = 'block';
+      }
+    } catch (error) {
+      // Erro de rede/offline
+      feedback.innerText = 'Não foi possível conectar ao servidor. Verifique sua conexão.';
+      feedback.style.color = '#e63946';
+      feedback.style.display = 'block';
     } finally {
-        botaoEnviar.disabled = false;
-        botaoEnviar.innerText = 'Enviar Mensagem';
+      // Restaura o botão ao texto original
+      botao.disabled = false;
+      botao.innerText = textoOriginal;
     }
   });
 }
+
+// Formulário da página de Contato
+configurarFormulario(
+  'contato-form',
+  'botao-enviar',
+  'form-feedback',
+  'Mensagem enviada com sucesso! Responderemos em até 24h.'
+);
+
+// Formulário da página de Orçamento
+configurarFormulario(
+  'orcamento-form',
+  'botao-orcamento',
+  'orcamento-feedback',
+  'Pedido de orçamento enviado com sucesso! Responderemos em breve.'
+);
+
